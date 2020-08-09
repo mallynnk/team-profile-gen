@@ -1,13 +1,13 @@
 const fs = require("fs")
 const inquirer = require('inquirer');
-const generatePage = require('./src/pageTemplate.js');
+const htmlTemplate = require('./src/pageTemplate.js');
 const writeFile = require('./utils/generatePage.js')
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html")
+// const OUTPUT_DIR = path.resolve(__dirname, "output")
+// const outputPath = path.join(OUTPUT_DIR, "team.html")
 
 let teamInfo = []; 
 const idArray = []
@@ -62,15 +62,22 @@ function createManager () {
                   return "Please enter at least one character.";
                 }
               },
-    ]);
-};
+    ])
+    .then(answers => {
+        const manager = new Manager(
+            answers.managerName,
+            answers.managerId,
+            answers.managerEmail,
+            answers.managerOffice);
+
+            teamInfo.push(manager);
+            idArray.push(answers.managerId)
+           addTeamMember();
+    });
+}
 
 function addTeamMember() {
-    console.log ( `
-    ===========================================
-    Add More Team Members
-    ===========================================
-    `);
+    console.log ("add more team members!");
 
     return inquirer.prompt([
         {   
@@ -80,7 +87,7 @@ function addTeamMember() {
             choices: ["Intern", "Engineer", "I don't want to add any more members"]
         }
     ]).then(userChoice => {
-        switch(userChoice.addTeamMember) {
+        switch(userChoice.memberChoice) {
             case "Engineer":
                 addEngineer(); 
                 break;
@@ -151,7 +158,7 @@ function addEngineer() {
 
             teamInfo.push(engineer);
             idArray.push(answers.engineerId)
-            createTeam();
+            addTeamMember();
     });
 }
 
@@ -210,15 +217,15 @@ function addIntern() {
             answers.internSchool);
         teamInfo.push(intern);
         idArray.push(answers.internId);
-        createTeam();
+        addTeamMember();
     });
 } 
-function buildTeam() {
-    if(!fs.existsSync(OUTPUT_DIR)) {
-        fs.mkdirSync(OUTPUT_DIR)
-    }
-    fs.writeFileSync(outputPath, generatePage(teamInfo), "utf-8")
 
+
+function buildTeam() {
+    const teamPage = htmlTemplate(teamInfo);
+    console.log(teamPage);
+    writeFile(teamPage)
 }
 
 createManager();
@@ -226,5 +233,6 @@ createManager();
 };
 
 appMenu()
+
 
 

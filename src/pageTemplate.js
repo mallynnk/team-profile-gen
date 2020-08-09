@@ -1,5 +1,6 @@
 
 
+
 const generateTeam = team => {
 //html for manager
 const generateManager = manager => {
@@ -44,7 +45,7 @@ const generateEngineer = engineer => {
 
 
 //html for Interns 
-const generateInterns = intern => {
+const generateIntern = intern => {
     return `
       <div class = "card employee-card">
         <div class = "card-header>
@@ -62,24 +63,30 @@ const generateInterns = intern => {
 
     `;
   };
+
+  const html = []
+
+    html.push(team 
+        .filter(employee => employee.getRole() === "Manager")
+        .map(manager => generateManager(manager))
+    );
+    html.push(team 
+        .filter(employee => employee.getRole() === "Engineer")
+        .map(engineer => generateEngineer(engineer))
+        .join("")
+    );
+    html.push(team 
+        .filter(employee => employee.getRole() === "Intern")
+        .map(intern => generateIntern(intern))
+        .join("")
+    );
+
+    console.log(html)
+return html;
+
+
 };
 
-const html = []
-
-html.push(team 
-  .filter(employee => employee.getRole() = "Manager")
-  .map(manager => generateManager(manager))
-);
-html.push(team 
-    .filter(employee => employee.getRole() = "Engineer")
-    .map(engineer => generateEngineer(engineer))
-    .join("")
-);
-html.push(team 
-    .filter(employee => employee.getRole() = "Intern")
-    .map(intern => generateIntern(intern))
-    .join("")
-);
 
 
 // export function to generate the entire page
@@ -93,31 +100,19 @@ module.exports = team => {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Portfolio Demo</title>
+      <title>Team</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
       <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="style.css">
     </head>
   
     <body>
-    <header>
-      <div class="container flex-row justify-space-between align-center py-3">
-        <h1 class="page-title text-secondary bg-dark py-2 px-3">${header.name}</h1>
-        <nav class="flex-row">
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${
-            header.github
-          }">GitHub</a>
-        </nav>
-      </div>
-    </header>
-    <main class="container my-5">
-        ${generateAbout(about)}
-        ${generateProjects(projects)}
-    </main>
-    <footer class="container text-center py-3">
-      <h3 class="text-dark">&copy; ${new Date().getFullYear()} by ${header.name}</h3>
-    </footer>
+
+    ${generateTeam(team)}
+      
+
   </body>
   </html>
   `;
 };
+
