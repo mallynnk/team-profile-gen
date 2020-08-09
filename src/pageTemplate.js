@@ -1,5 +1,6 @@
 
-const buildTeam = team => {
+
+const generateTeam = team => {
 //html for manager
 const generateManager = manager => {
     return `
@@ -43,7 +44,7 @@ const generateEngineer = engineer => {
 
 
 //html for Interns 
-const generateInterns = templateData => {
+const generateInterns = intern => {
     return `
       <div class = "card employee-card">
         <div class = "card-header>
@@ -61,16 +62,30 @@ const generateInterns = templateData => {
 
     `;
   };
-}
+};
 
-module.exports = templateData => {
-    console.log(templateData)
-    //destructure projects and about data from templateData based on their property key names
-    const { projects, about, ...header } = templateData
-    console.log(projects)
-    console.log(about)
-    console.log(header)
-    //i don't understand "header.name" or "header.github" ???
+const html = []
+
+html.push(team 
+  .filter(employee => employee.getRole() = "Manager")
+  .map(manager => generateManager(manager))
+);
+html.push(team 
+    .filter(employee => employee.getRole() = "Engineer")
+    .map(engineer => generateEngineer(engineer))
+    .join("")
+);
+html.push(team 
+    .filter(employee => employee.getRole() = "Intern")
+    .map(intern => generateIntern(intern))
+    .join("")
+);
+
+
+// export function to generate the entire page
+
+module.exports = team => {
+    console.log(team)
     return ` 
     <!DOCTYPE html> 
     <html lang="en"> 
