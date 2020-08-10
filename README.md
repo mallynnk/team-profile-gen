@@ -21,6 +21,11 @@ If Inquirer is installed correctly, the user should first run the four tests in 
 ## License
 This project is covered by ISC.
 
+## Link to Walkthrough Video
+
+https://drive.google.com/file/d/1jajw5i3KxHTKns8h7k_iX5WGN-cq26Dy/view
+
+
 ## Screenshot
  ![Screenshot of terminal prompts](/img/terminal.png)
  ![Screenshot of generated index](/img/sample.png)
