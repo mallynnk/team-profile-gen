@@ -6,14 +6,13 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-// const OUTPUT_DIR = path.resolve(__dirname, "output")
-// const outputPath = path.join(OUTPUT_DIR, "team.html")
-
 let teamInfo = []; 
 const idArray = []
 
-function appMenu() {
+//function to build team
+function createTeam() {
 
+//function to prompt Manager input
 function createManager () {
     console.log ("please build your team");
 
@@ -76,6 +75,7 @@ function createManager () {
     });
 }
 
+//function to add team members
 function addTeamMember() {
     console.log ("add more team members!");
 
@@ -101,6 +101,7 @@ function addTeamMember() {
 
 }
 
+//function to add an engineer to the team
 function addEngineer() {
 
     inquirer.prompt([
@@ -162,6 +163,7 @@ function addEngineer() {
     });
 }
 
+//function to add intern to the team
 function addIntern() {
     return inquirer.prompt([
         {   
@@ -221,7 +223,7 @@ function addIntern() {
     });
 } 
 
-
+//function to send input info to pageTemplate in order to generatePage
 function buildTeam() {
     const teamPage = htmlTemplate(teamInfo);
     console.log(teamPage);
@@ -232,7 +234,8 @@ createManager();
 
 };
 
-appMenu()
+//call to build the team
+createTeam()
 
 
 
