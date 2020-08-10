@@ -33,7 +33,7 @@ const generateEngineer = engineer => {
           <ul class="list-group">
               <li class="list-group-item">ID: ${engineer.getId()}</li>
               <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-              <li class="list-group-item">GitHub: <a href="https://github.com${engineer.getGithub()}" target="_blank" rel="none">${engineer.getGithub()}</a></li>
+              <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="none">${engineer.getGithub()}</a></li>
           </ul>
         </div>
       </div>  

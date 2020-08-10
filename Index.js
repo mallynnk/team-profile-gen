@@ -226,7 +226,6 @@ function addIntern() {
 //function to send input info to pageTemplate in order to generatePage
 function buildTeam() {
     const teamPage = htmlTemplate(teamInfo);
-    console.log(teamPage);
     writeFile(teamPage)
 }
 
